@@ -437,14 +437,15 @@ class StatusBar(component.Component):
         log.debug("_on_set_connection_limit")
         self.set_limit_value(widget, "max_connections_global")
 
+    #COMMENT OUT TO AVOID OPERATOR TO CHANGE PREFERENCES
     def _on_health_icon_clicked(self, widget, event):
-        component.get("Preferences").show("Network")
+        component.get("Preferences")#.show("Network")
 
     def _on_notconnected_item_clicked(self, widget, event):
         component.get("ConnectionManager").show()
 
     def _on_traffic_item_clicked(self, widget, event):
-        component.get("Preferences").show("Network")
+        component.get("Preferences")#.show("Network")
 
     def _on_diskspace_item_clicked(self, widget, event):
-        component.get("Preferences").show("Downloads")
+        component.get("Preferences")#.show("Downloads")
