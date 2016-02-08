@@ -27,6 +27,11 @@ import deluge.configmanager
 import deluge.error
 from deluge.log import setup_logger
 
+from deluge_login import accesslevel
+import time
+import hashlib
+import gtk
+import pygtk
 
 def version_callback(option, opt_str, value, parser):
     print(os.path.basename(sys.argv[0]) + ": " + deluge.common.get_version())
@@ -43,7 +48,20 @@ def version_callback(option, opt_str, value, parser):
     raise SystemExit
 
 
+
 def start_ui():
+    
+    print("main start_ui")
+    print(accesslevel)
+#    login()
+	#    while(not loggedin):
+ #       print("Attempting login")
+  #  print("Logged in")
+    
+#    while not logged:
+#    	print ("loop")
+#        login()
+
     """Entry point for ui script"""
     # Setup the argument parser
     parser = OptionParser(usage="%prog [options] [actions]")
@@ -117,7 +135,6 @@ def start_ui():
     from deluge.ui.ui import UI
     log.info("Starting ui..")
     UI(options, args, options.args)
-
 
 def start_daemon():
     """Entry point for daemon script"""

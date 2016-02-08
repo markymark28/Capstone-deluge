@@ -1038,9 +1038,21 @@ class PathChooserComboBox(gtk.HBox, StoredValuesPopup, gobject.GObject):
         self.setting_accelerator_key = False
         self.builder = gtk.Builder()
         self.popup_buttonbox = self.builder.get_object("buttonbox")
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "path_combo_chooser.ui")
-        ))
+        ###################################################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        self.builder.add_from_file(filepath+"/path_combo_chooser.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "path_combo_chooser.ui")
+        #))
         self.button_toggle = self.builder.get_object("button_toggle_dropdown")
         self.text_entry = self.builder.get_object("entry_text")
         self.open_filechooser_dialog_button = self.builder.get_object("button_open_dialog")

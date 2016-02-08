@@ -37,18 +37,30 @@ class AddTorrentDialog(component.Component):
         component.Component.__init__(self, "AddTorrentDialog")
         self.builder = gtk.Builder()
         # The base dialog
-        self.builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "add_torrent_dialog.ui")
-        ))
+        #######################################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        self.builder.add_from_file(filepath+"/add_torrent_dialog.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "add_torrent_dialog.ui")
+        #))
         # The infohash dialog
-        self.builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "add_torrent_dialog.infohash.ui")
-        ))
+        self.builder.add_from_file(filepath+"/add_torrent_dialog.infohash.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "add_torrent_dialog.infohash.ui")
+        #))
         # The url dialog
-        self.builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "add_torrent_dialog.url.ui")
-        ))
-
+        self.builder.add_from_file(filepath+"/add_torrent_dialog.url.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "add_torrent_dialog.url.ui")
+        #))
+		######################################################################################
         self.dialog = self.builder.get_object("dialog_add_torrent")
 
         self.dialog.connect("delete-event", self._on_delete_event)

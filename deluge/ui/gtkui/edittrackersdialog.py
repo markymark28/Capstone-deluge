@@ -29,18 +29,30 @@ class EditTrackersDialog:
         self.gtkui_config = ConfigManager("gtkui.conf")
 
         # Main dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "edit_trackers.ui")
-        ))
+        ##################################################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        self.builder.add_from_file(filepath+"/edit_trackers.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "edit_trackers.ui")
+        #))
         # add tracker dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "edit_trackers.add.ui")
-        ))
+        self.builder.add_from_file(filepath+"/edit_trackers.add.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "edit_trackers.add.ui")
+        #))
         # edit tracker dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "edit_trackers.edit.ui")
-        ))
-
+        self.builder.add_from_file(filepath+"/edit_trackers.edit.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "edit_trackers.edit.ui")
+        #))
+		#################################################################################
         self.dialog = self.builder.get_object("edit_trackers_dialog")
         self.treeview = self.builder.get_object("tracker_treeview")
         self.add_tracker_dialog = self.builder.get_object("add_tracker_dialog")

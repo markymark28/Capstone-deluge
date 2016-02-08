@@ -56,7 +56,6 @@ from deluge.ui.ui import _UI
 
 
 gobject.set_prgname("deluge")
-
 log = logging.getLogger(__name__)
 
 try:
@@ -145,12 +144,26 @@ DEFAULT_PREFS = {
     "language": None,
 }
 
+class DialogExample(gtk.Dialog):
+
+    def __init__(self, parent):
+        gtk.Dialog.__init__(self, "My Dialog", parent, 0,
+            (gtk.STOCK_CANCEL, gtk.ResponseType.CANCEL,
+             gtk.STOCK_OK, gtk.ResponseType.OK))
+
+        self.set_default_size(150, 100)
+
+        label = gtk.Label("This is a dialog to display additional information")
+
+        box = self.get_content_area()
+        box.add(label)
+        self.show_all()
+
 
 class GtkUI(object):
     def __init__(self, args):
         # Setup gtkbuilder/glade translation
         deluge.common.setup_translations(setup_gettext=False, setup_pygtk=True)
-
         # Setup signals
         def on_die(*args):
             log.debug("OS signal 'die' caught with args: %s", args)
@@ -199,10 +212,15 @@ class GtkUI(object):
 
         # We make sure that the UI components start once we get a core URI
         client.set_disconnect_callback(self.__on_disconnect)
-
+        
         self.trackericons = TrackerIcons()
         self.sessionproxy = SessionProxy()
         # Initialize various components of the gtkui
+        
+        
+        
+        
+        
         self.mainwindow = MainWindow()
         self.menubar = MenuBar()
         self.toolbar = ToolBar()
@@ -214,7 +232,6 @@ class GtkUI(object):
         self.systemtray = SystemTray()
         self.statusbar = StatusBar()
         self.addtorrentdialog = AddTorrentDialog()
-
         if deluge.common.osx_check() and gtk.gdk.WINDOWING == "quartz":
             def nsapp_open_file(osxapp, filename):
                 # Will be raised at app launch (python opening main script)
@@ -231,7 +248,6 @@ class GtkUI(object):
 
         # Show the connection manager
         self.connectionmanager = ConnectionManager()
-
         # Setup RPC stats logging
         # daemon_bps: time, bytes_sent, bytes_recv
         self.daemon_bps = (0, 0, 0)
@@ -285,9 +301,9 @@ class GtkUI(object):
                   deluge.common.fsize(sent), sent_rate, deluge.common.fsize(recv), recv_rate)
 
     def _on_reactor_start(self):
-        log.debug("_on_reactor_start")
+        
         self.mainwindow.first_show()
-
+        #######
         if self.config["classic_mode"]:
             def on_dialog_response(response):
                 if response != gtk.RESPONSE_YES:
@@ -322,6 +338,7 @@ class GtkUI(object):
                     else:
                         raise ex
                 else:
+                    ##########################
                     component.start()
                     return
             except Exception:

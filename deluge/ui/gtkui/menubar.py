@@ -38,19 +38,31 @@ class MenuBar(component.Component):
         self.config = ConfigManager("gtkui.conf")
 
         self.builder = gtk.Builder()
+        #######################################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
         # Get the torrent menu from the gtk builder file
-        self.builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "torrent_menu.ui")
-        ))
+        self.builder.add_from_file(filepath+"/torrent_menu.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "torrent_menu.ui")
+        #))
         # Get the torrent options menu from the gtk builder file
-        self.builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "torrent_menu.options.ui")
-        ))
+        self.builder.add_from_file(filepath+"/torrent_menu.options.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "torrent_menu.options.ui")
+        #))
         # Get the torrent queue menu from the gtk builder file
-        self.builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "torrent_menu.queue.ui")
-        ))
-
+        self.builder.add_from_file(filepath+"/torrent_menu.queue.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "torrent_menu.queue.ui")
+        #))
+		##########################################################################
         # Attach queue torrent menu
         torrent_queue_menu = self.builder.get_object("queue_torrent_menu")
         self.builder.get_object("menuitem_queue").set_submenu(torrent_queue_menu)
@@ -319,9 +331,22 @@ class MenuBar(component.Component):
     def show_move_storage_dialog(self, status):
         log.debug("show_move_storage_dialog")
         builder = gtk.Builder()
-        builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "move_storage_dialog.ui")
-        ))
+        ########################################################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        builder.add_from_file(filepath+"/move_storage_dialog.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "move_storage_dialog.ui")
+        #))
+        ##########################################################################################
         # Keep it referenced:
         #  https://bugzilla.gnome.org/show_bug.cgi?id=546802
         self.move_storage_dialog = builder.get_object("move_storage_dialog")
