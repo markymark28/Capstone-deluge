@@ -40,14 +40,6 @@ class ToolBar(component.Component):
             "on_toolbutton_queue_down_clicked": self.on_toolbutton_queue_down_clicked
         })
         self.change_sensitivity = [
-            "toolbutton_add",
-            "toolbutton_remove",
-            "toolbutton_pause",
-            "toolbutton_resume",
-            "toolbutton_queue_up",
-            "toolbutton_queue_down",
-            "toolbutton_filter",
-            "find_menuitem"
         ]
 
         # Hide if necessary
@@ -58,6 +50,7 @@ class ToolBar(component.Component):
             not self.config["classic_mode"])
 
         for widget in self.change_sensitivity:
+            
             self.window.get_builder().get_object(widget).set_sensitive(True)
 
     def stop(self):
