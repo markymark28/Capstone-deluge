@@ -115,17 +115,30 @@ class ConnectionManager(component.Component):
         # Get the gtk builder file for the connection manager
         self.builder = gtk.Builder()
         # The main dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "connection_manager.ui")
-        ))
+        ###############################################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        self.builder.add_from_file(filepath+"/connection_manager.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "connection_manager.ui")
+        #))
         # The add host dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "connection_manager.addhost.ui")
-        ))
+        self.builder.add_from_file(filepath+"/connection_manager.addhost.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "connection_manager.addhost.ui")
+        #))
         # The ask password dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "connection_manager.askpassword.ui")
-        ))
+        self.builder.add_from_file(filepath+"/connection_manager.askpassword.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "connection_manager.askpassword.ui")
+        #))
+        ##################################################################################
         self.window = component.get("MainWindow")
 
         # Setup the ConnectionManager dialog

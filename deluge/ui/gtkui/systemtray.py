@@ -63,10 +63,22 @@ class SystemTray(component.Component):
     def enable(self):
         """Enables the system tray icon."""
         self.builder = gtk.Builder()
-        self.builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "tray_menu.ui"))
-        )
-
+        #############################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        self.builder.add_from_file(filepath+"/tray_menu.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "tray_menu.ui"))
+        #)
+####################################################################################
         self.builder.connect_signals({
             "on_menuitem_show_deluge_activate": self.on_menuitem_show_deluge_activate,
             "on_menuitem_add_torrent_activate": self.on_menuitem_add_torrent_activate,

@@ -33,22 +33,34 @@ class CreateTorrentDialog:
         self.builder = gtk.Builder()
 
         # The main dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "create_torrent_dialog.ui")
-        ))
+        ######################################################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        self.builder.add_from_file(filepath+"/create_torrent_dialog")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "create_torrent_dialog.ui")
+        #))
         # The remote path dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "create_torrent_dialog.remote_path.ui")
-        ))
+        self.builder.add_from_file(filepath+"/create_torrent_dialog.remote_path.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "create_torrent_dialog.remote_path.ui")
+        #))
         # The remote save dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "create_torrent_dialog.remote_save.ui")
-        ))
+        self.builder.add_from_file(filepath+"/create_torrent_dialog.remote_save.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "create_torrent_dialog.remote_save.ui")
+        #))
         # The progress dialog
-        self.builder.add_from_file(resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "create_torrent_dialog.progress.ui")
-        ))
-
+        self.builder.add_from_file(filepath+"/create_torrent_dialog.progress.ui")#resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "create_torrent_dialog.progress.ui")
+        #))
+		####################################################################################
         self.config = ConfigManager("gtkui.conf")
 
         self.dialog = self.builder.get_object("create_torrent_dialog")

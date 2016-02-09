@@ -12,6 +12,8 @@ import logging
 import os.path
 from hashlib import sha1 as sha
 
+import time
+
 import gtk
 import pygtk
 from twisted.internet import reactor
@@ -35,6 +37,7 @@ except ImportError:
 
 
 log = logging.getLogger(__name__)
+deluge.common.setup_translations(setup_gettext=False, setup_pygtk=True)
 
 
 class _GtkBuilderSignalsHolder(object):
@@ -66,6 +69,9 @@ class MainWindow(component.Component):
         self.config = ConfigManager("gtkui.conf")
         self.gtk_builder_signals_holder = _GtkBuilderSignalsHolder()
         self.main_builder = gtk.Builder()
+        #while(True):
+        #	print("not logged")
+        
         # Patch this GtkBuilder to avoid connecting signals from elsewhere
         #
         # Think about splitting up the main window gtkbuilder file into the necessary parts
@@ -77,27 +83,40 @@ class MainWindow(component.Component):
             raise RuntimeError("In order to connect signals to this GtkBuilder instance please use "
                                "'component.get(\"MainWindow\").connect_signals()'")
         self.main_builder.connect_signals = patched_connect_signals
-
+		##########################################################################################################################
         # Get the gtk builder file for the main window
-        self.main_builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "main_window.ui"))
-        )
+		#THESE FILE PATHS ARENT GOING TO BE THIS FOR EVERYONE
+		#HOW DO WE IMPORT THE ACCESS LEVEL FROM ANOTHER FILE 
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)         
+        self.main_builder.add_from_file(filepath+"/main_window.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade/operator", "main_window.ui"))
+        #)
         # The new release dialog
-        self.main_builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "main_window.new_release.ui"))
-        )
+        self.main_builder.add_from_file(filepath+"/main_window.new_release.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "main_window.new_release.ui"))
+        #)
         # The tabs
-        self.main_builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "main_window.tabs.ui"))
-        )
+        self.main_builder.add_from_file(filepath+"/main_window.tabs.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "main_window.tabs.ui"))
+        #)
         # The tabs file menu
-        self.main_builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "main_window.tabs.menu_file.ui"))
-        )
+        self.main_builder.add_from_file(filepath+"/main_window.tabs.menu_file.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "main_window.tabs.menu_file.ui"))
+        #)
         # The tabs peer menu
-        self.main_builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "main_window.tabs.menu_peer.ui"))
-        )
+        self.main_builder.add_from_file(filepath+"/main_window.tabs.menu_peer.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "main_window.tabs.menu_peer.ui"))
+        #)
 
         self.window = self.main_builder.get_object("main_window")
 
@@ -105,28 +124,28 @@ class MainWindow(component.Component):
         self.vpaned = self.main_builder.get_object("vpaned")
 
         self.initial_vpaned_position = self.config["window_pane_position"]
-
+		
         # Load the window state
         self.load_window_state()
-
+        		
         # Keep track of window's minimization state so that we don't update the
         # UI when it is minimized.
         self.is_minimized = False
 
         self.window.drag_dest_set(gtk.DEST_DEFAULT_ALL, [('text/uri-list', 0, 80)], gtk.gdk.ACTION_COPY)
-
+        
         # Connect events
+#        while(True):
+#        	pass
         self.window.connect("window-state-event", self.on_window_state_event)
         self.window.connect("configure-event", self.on_window_configure_event)
         self.window.connect("delete-event", self.on_window_delete_event)
         self.window.connect("drag-data-received", self.on_drag_data_received_event)
         self.vpaned.connect("notify::position", self.on_vpaned_position_event)
         self.window.connect("expose-event", self.on_expose_event)
-
         self.config.register_set_function("show_rate_in_title", self._on_set_show_rate_in_title, apply_now=False)
 
         client.register_event_handler("NewVersionAvailableEvent", self.on_newversionavailable_event)
-
     def connect_signals(self, mapping_or_class):
         self.gtk_builder_signals_holder.connect_signals(mapping_or_class)
 

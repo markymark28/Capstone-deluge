@@ -105,7 +105,20 @@ class FilterTreeView(component.Component):
 
         # filtertree menu
         builder = gtk.Builder()
-        builder.add_from_file(resource_filename("deluge.ui.gtkui", os.path.join("glade", "filtertree_menu.ui")))
+        ##########################################################################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        builder.add_from_file(filepath+"/filtertree_menu.ui")#resource_filename("deluge.ui.gtkui", os.path.join("glade", "filtertree_menu.ui")))
+        ##########################################################################################################
         self.menu = builder.get_object("filtertree_menu")
         builder.connect_signals({
             "select_all": self.on_select_all,

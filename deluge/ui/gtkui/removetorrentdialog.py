@@ -40,10 +40,22 @@ class RemoveTorrentDialog(object):
         self.__torrent_ids = torrent_ids
 
         self.builder = gtk.Builder()
-        self.builder.add_from_file(deluge.common.resource_filename(
-            "deluge.ui.gtkui", os.path.join("glade", "remove_torrent_dialog.ui"))
-        )
-
+        ####################################################################################################
+        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        self.builder.add_from_file(filepath+"/remove_torrent_dialog.ui")#deluge.common.resource_filename(
+            #"deluge.ui.gtkui", os.path.join("glade", "remove_torrent_dialog.ui"))
+        #)
+		#####################################################################################################
         self.__dialog = self.builder.get_object("remove_torrent_dialog")
         self.__dialog.set_transient_for(component.get("MainWindow").window)
 
