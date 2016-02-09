@@ -17,46 +17,29 @@ class Handler:
 		lgin(usrname,psswrd)
 
 def lgin(usr,pwd):
-	#import pswd DB
+	#make global variabls
 	global accesslevel
-	k = open("hashes.txt", 'r')
-	tbl = {}
-	i = 0
-	for line in k:
-		i = i + 1
-		if i%2 == 0:
-			lvl = line.rstrip('\n')
-			accesslevel = lvl
-			tbl[hsh] = lvl
-		else:
-			hsh = line.rstrip('\n')
-	#import usrname DB
-	d = open("usrnames.txt", 'r')
-	usrlist = []
+	global loggedin
 	
-	for line in d:
-		name = line.rstrip('\n')
-		usrlist.append(name)
+	#create hashed username and password
+	enteredPassword = hashlib.md5(str.encode(pwd.get_text()))
+	enteredUsername = hashlib.md5(str.encode(usr.get_text()))
 	
-	#check for pswd md5hash
-	hash_object = hashlib.md5(str.encode(pwd.get_text()))
-	pwdkey = hash_object.hexdigest()
-#	print(pwdkey)
-	haspwd = tbl.has_key(pwdkey)
-#	print(haspwd)
+	#open username and password file
+	loginFile = open("hashes.txt", 'r')
 	
-	#check for usrname md5hash
-	hash_object2 = hashlib.md5(str.encode(usr.get_text()))
-	usrkey = hash_object2.hexdigest()
-#	print(usrkey)
-	if usrlist.count(usrkey) > 0:
-		hasusr = True
-	else:
-		hasusr = False
-#	print(hasusr)
-
-	if hasusr and haspwd:
-		loggedin = True
+	#check for matching username and password
+	for line in loginFile:
+		up = line.split("\t")
+		username = up[0]
+		password = up[1]
+		if (str(username)) == enteredUsername.hexdigest():
+			if (str(password)) == enteredPassword.hexdigest():
+				accesslevel = str(up[2])
+				loggedin = True
+				break
+	#if matching username and password then open deluge
+	if loggedin:
 		print("Welcome " + usr.get_text())
 		t = open("loggedinusrs.txt", 'w')
 		t.write(usr.get_text())
@@ -65,10 +48,11 @@ def lgin(usr,pwd):
 		t.close
 		gtk.main_quit()
 	else:
-		print("invalid login, try again")
+		print("Invalid username or password")
+	
 
 def login():
-    builder.add_from_file("login_menu.ui")#deluge.common.resource_filename("deluge.ui.gtkui", os.path.join("glade", "login_menu.ui")))
+    builder.add_from_file("login_menu.ui")
     builder.connect_signals(Handler())
     window = builder.get_object("window1")
     window.show_all()    
