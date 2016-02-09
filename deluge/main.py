@@ -53,14 +53,6 @@ def start_ui():
     
     print("main start_ui")
     print(accesslevel)
-#    login()
-	#    while(not loggedin):
- #       print("Attempting login")
-  #  print("Logged in")
-    
-#    while not logged:
-#    	print ("loop")
-#        login()
 
     """Entry point for ui script"""
     # Setup the argument parser
