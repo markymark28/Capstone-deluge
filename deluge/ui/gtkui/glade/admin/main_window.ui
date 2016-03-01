@@ -85,7 +85,6 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkMenuItem" id="menu_file">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_File</property>
@@ -96,7 +95,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_addtorrent">
                         <property name="label" translatable="yes">_Add Torrent</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
@@ -109,7 +107,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_createtorrent">
                         <property name="label" translatable="yes">_Create Torrent</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -126,7 +123,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_quitdaemon">
                         <property name="label" translatable="yes">Quit &amp; _Shutdown Daemon</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">False</property>
@@ -143,7 +139,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_quit">
                         <property name="label">gtk-quit</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -158,7 +153,6 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="menu_edit">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Edit</property>
@@ -170,7 +164,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_preferences">
                         <property name="label">gtk-preferences</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -183,7 +176,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_connectionmanager">
                         <property name="label" translatable="yes">_Connection Manager</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -198,7 +190,6 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="menu_torrent">
-                <property name="use_action_appearance">False</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Torrent</property>
                 <property name="use_underline">True</property>
@@ -206,7 +197,6 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="menu_view">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_View</property>
@@ -217,7 +207,6 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkCheckMenuItem" id="menuitem_toolbar">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">_Toolbar</property>
@@ -228,7 +217,6 @@
                     </child>
                     <child>
                       <object class="GtkCheckMenuItem" id="menuitem_sidebar">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">_Sidebar</property>
@@ -239,7 +227,6 @@
                     </child>
                     <child>
                       <object class="GtkCheckMenuItem" id="menuitem_statusbar">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Status_bar</property>
@@ -256,7 +243,6 @@
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="menu_tabs">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">T_abs</property>
@@ -265,7 +251,6 @@
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="menu_columns">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">_Columns</property>
@@ -274,7 +259,6 @@
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="find_menuitem">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
@@ -286,7 +270,6 @@
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="menu_Sidebar">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="no_show_all">True</property>
@@ -299,7 +282,6 @@
                             <property name="no_show_all">True</property>
                             <child>
                               <object class="GtkCheckMenuItem" id="sidebar_show_zero">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">Show _Zero Hits</property>
@@ -310,7 +292,6 @@
                             </child>
                             <child>
                               <object class="GtkCheckMenuItem" id="sidebar_show_trackers">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">Show _Trackers</property>
@@ -338,7 +319,6 @@
             </child>
             <child>
               <object class="GtkMenuItem" id="menu_help">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Help</property>
@@ -349,7 +329,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_homepage">
                         <property name="label" translatable="yes">_Homepage</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -360,7 +339,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_faq">
                         <property name="label" translatable="yes">_FAQ</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Frequently Asked Questions</property>
@@ -373,7 +351,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_community">
                         <property name="label" translatable="yes">_Community</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -390,7 +367,6 @@
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_about">
                         <property name="label">gtk-about</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
@@ -416,7 +392,6 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkToolButton" id="toolbutton_add">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
@@ -434,7 +409,6 @@
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_remove">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
@@ -451,7 +425,6 @@
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_filter">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
@@ -479,7 +452,6 @@ This will filter torrents for the current selection on the sidebar.</property>
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_pause">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
@@ -497,7 +469,6 @@ This will filter torrents for the current selection on the sidebar.</property>
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_resume">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
@@ -523,7 +494,6 @@ This will filter torrents for the current selection on the sidebar.</property>
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_queue_up">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
@@ -540,7 +510,6 @@ This will filter torrents for the current selection on the sidebar.</property>
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_queue_down">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
@@ -566,7 +535,6 @@ This will filter torrents for the current selection on the sidebar.</property>
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_preferences">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="has_tooltip">True</property>
@@ -583,7 +551,6 @@ This will filter torrents for the current selection on the sidebar.</property>
             </child>
             <child>
               <object class="GtkToolButton" id="toolbutton_connectionmanager">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="has_tooltip">True</property>
@@ -591,6 +558,22 @@ This will filter torrents for the current selection on the sidebar.</property>
                 <property name="label" translatable="yes">Connection Manager</property>
                 <property name="stock_id">gtk-network</property>
                 <signal name="clicked" handler="on_toolbutton_connectionmanager_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="toolbutton_accountmanager">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Account Manager</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-properties</property>
+                <accelerator key="f" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
+                <signal name="clicked" handler="on_toolbutton_accountmanager_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -636,7 +619,6 @@ This will filter torrents for the current selection on the sidebar.</property>
                             <property name="can_focus">False</property>
                             <child>
                               <object class="GtkButton" id="close_search_button">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -704,7 +686,6 @@ This will filter torrents for the current selection on the sidebar.</property>
                             <child>
                               <object class="GtkCheckButton" id="search_torrents_match">
                                 <property name="label" translatable="yes">_Match Case</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
