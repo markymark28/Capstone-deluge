@@ -275,6 +275,9 @@ class MenuBar(component.Component):
         log.debug("on_menuitem_connectionmanager_activate")
         component.get("ConnectionManager").show()
 
+    def on_menuitem_accountmanager_activate(self, data=None):
+        log.debug("on_menuitem_accountmanager_activate")
+        component.get("AccountManager").show()
     # Torrent Menu #
     def on_menuitem_pause_activate(self, data=None):
         log.debug("on_menuitem_pause_activate")
@@ -332,7 +335,7 @@ class MenuBar(component.Component):
         log.debug("show_move_storage_dialog")
         builder = gtk.Builder()
         ########################################################################################
-        read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        read = open("/home/m160426/Desktop/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
         i = 0
         for line in read:
             i = i + 1
@@ -342,7 +345,7 @@ class MenuBar(component.Component):
             else:
                 usrname = line.rstrip('\n')
         read.close
-        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        filepath = "/home/m160426/Desktop/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
         builder.add_from_file(filepath+"/move_storage_dialog.ui")#deluge.common.resource_filename(
             #"deluge.ui.gtkui", os.path.join("glade", "move_storage_dialog.ui")
         #))

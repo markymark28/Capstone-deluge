@@ -37,9 +37,10 @@ class ToolBar(component.Component):
             "on_toolbutton_preferences_clicked": self.on_toolbutton_preferences_clicked,
             "on_toolbutton_connectionmanager_clicked": self.on_toolbutton_connectionmanager_clicked,
             "on_toolbutton_queue_up_clicked": self.on_toolbutton_queue_up_clicked,
-            "on_toolbutton_queue_down_clicked": self.on_toolbutton_queue_down_clicked
+            "on_toolbutton_queue_down_clicked": self.on_toolbutton_queue_down_clicked,
+            "on_toolbutton_accountmanager_clicked":self.on_toolbutton_accountmanager_clicked #where I added shit
         })
-        self.change_sensitivity = [
+        self.change_sensitivity = ["toolbutton_accountmanager"
         ]
 
         # Hide if necessary
@@ -132,3 +133,6 @@ class ToolBar(component.Component):
     def on_toolbutton_queue_down_clicked(self, data):
         log.debug("on_toolbutton_queue_down_clicked")
         component.get("MenuBar").on_menuitem_queue_down_activate(data)
+    def on_toolbutton_accountmanager_clicked(self, data):
+        log.debug("on_toolbutton_accountmanager_clicked")
+        component.get("MenuBar").on_menuitem_accountmanager_activate(data) #added shit here too

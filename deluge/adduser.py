@@ -16,6 +16,12 @@ f.write("%s\t" % hash_object.hexdigest())
 hash_object = hashlib.md5(b'gonavy')
 f.write("%s\t" % hash_object.hexdigest())
 f.write("maintenance\n")
-f.close()
 
+#user 3                                                                                                                                                      
+hash_object = hashlib.md5(b'Mark')
+f.write("%s\t" % hash_object.hexdigest())
+hash_object = hashlib.md5(b'blarg')
+f.write("%s\t" % hash_object.hexdigest())
+f.write("admin\n")
+f.close()
 
