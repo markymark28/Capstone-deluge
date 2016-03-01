@@ -45,7 +45,7 @@ class CreateTorrentDialog:
                 usrname = line.rstrip('\n')
         read.close
         filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
-        self.builder.add_from_file(filepath+"/create_torrent_dialog")#resource_filename(
+        self.builder.add_from_file(filepath+"/create_torrent_dialog.ui")#resource_filename(
             #"deluge.ui.gtkui", os.path.join("glade", "create_torrent_dialog.ui")
         #))
         # The remote path dialog
