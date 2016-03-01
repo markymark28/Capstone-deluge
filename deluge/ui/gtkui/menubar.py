@@ -135,7 +135,7 @@ class MenuBar(component.Component):
             # Edit Menu
             "on_menuitem_preferences_activate": self.on_menuitem_preferences_activate,
             "on_menuitem_connectionmanager_activate": self.on_menuitem_connectionmanager_activate,
-
+            ##########################
             # View Menu
             "on_menuitem_toolbar_toggled": self.on_menuitem_toolbar_toggled,
             "on_menuitem_sidebar_toggled": self.on_menuitem_sidebar_toggled,
@@ -265,8 +265,8 @@ class MenuBar(component.Component):
     def on_menuitem_sendtorrent_activate(self, data=None):
     	from deluge.ui.gtkui.sendtorrentdialog import SendTorrentDialog
         SendTorrentDialog().show()
-    
     '''
+    
     def on_menuitem_sendtorrent_activate(self, data=None):
         log.debug("on_menuitem_sendtorrent_activate")
         component.get("SendTorrentDialog").show()

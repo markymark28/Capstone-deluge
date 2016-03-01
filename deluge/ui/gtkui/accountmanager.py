@@ -95,7 +95,7 @@ class AccountManager(component.Component):
             # Torrent Menu
             "on_button_adduser_clicked": self.on_button_adduser_clicked,
             "on_button_removeuser_clicked": self.on_button_removeuser_clicked,
-	    "on_button_edituser_clicked": self.on_button_edituser_clicked,
+	        "on_button_edituser_clicked": self.on_button_edituser_clicked,
             "on_hostlist_row_activated": self.on_hostlist_row_activated,
             "on_button_close_clicked": self.on_button_close_clicked
         })
@@ -160,7 +160,8 @@ class AccountManager(component.Component):
     def on_button_edituser_clicked(self,widget):
         pass
     def on_button_adduser_clicked(self,widget):
-        pass
+        print("hhh")
+        component.get("AddAccount").show()
 
     def on_button_removeuser_clicked(self,widget):
         pass

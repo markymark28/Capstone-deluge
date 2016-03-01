@@ -48,6 +48,7 @@ from deluge.ui.gtkui.sidebar import SideBar
 from deluge.ui.gtkui.statusbar import StatusBar
 from deluge.ui.gtkui.systemtray import SystemTray
 from deluge.ui.gtkui.accountmanager import AccountManager
+from deluge.ui.gtkui.addaccount import AddAccount
 from deluge.ui.gtkui.addaccountdialog import AddAccountDialog
 from deluge.ui.gtkui.toolbar import ToolBar
 from deluge.ui.gtkui.torrentdetails import TorrentDetails
@@ -55,7 +56,7 @@ from deluge.ui.gtkui.torrentview import TorrentView
 from deluge.ui.sessionproxy import SessionProxy
 from deluge.ui.tracker_icons import TrackerIcons
 from deluge.ui.ui import _UI
-
+from deluge.ui.gtkui.sendtorrentdialog import SendTorrentDialog
 
 gobject.set_prgname("deluge")
 log = logging.getLogger(__name__)
@@ -234,6 +235,7 @@ class GtkUI(object):
         self.systemtray = SystemTray()
         self.statusbar = StatusBar()
         self.addtorrentdialog = AddTorrentDialog()
+        self.addaccount = AddAccount()
         if deluge.common.osx_check() and gtk.gdk.WINDOWING == "quartz":
             def nsapp_open_file(osxapp, filename):
                 # Will be raised at app launch (python opening main script)
