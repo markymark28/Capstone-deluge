@@ -47,6 +47,8 @@ from deluge.ui.gtkui.queuedtorrents import QueuedTorrents
 from deluge.ui.gtkui.sidebar import SideBar
 from deluge.ui.gtkui.statusbar import StatusBar
 from deluge.ui.gtkui.systemtray import SystemTray
+from deluge.ui.gtkui.accountmanager import AccountManager
+from deluge.ui.gtkui.addaccountdialog import AddAccountDialog
 from deluge.ui.gtkui.toolbar import ToolBar
 from deluge.ui.gtkui.torrentdetails import TorrentDetails
 from deluge.ui.gtkui.torrentview import TorrentView
@@ -248,6 +250,8 @@ class GtkUI(object):
 
         # Show the connection manager
         self.connectionmanager = ConnectionManager()
+        self.accountmanager = AccountManager()
+        self.addaccountdialog = AddAccountDialog()
         # Setup RPC stats logging
         # daemon_bps: time, bytes_sent, bytes_recv
         self.daemon_bps = (0, 0, 0)
