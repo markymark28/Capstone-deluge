@@ -159,6 +159,7 @@ class AccountManager(component.Component):
         
     def on_button_edituser_clicked(self,widget):
         pass
+        component.get("EditAccount").show()
     def on_button_adduser_clicked(self,widget):
         print("hhh")
         component.get("AddAccount").show()

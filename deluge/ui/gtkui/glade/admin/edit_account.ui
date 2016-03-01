@@ -45,7 +45,7 @@
               <object class="GtkLabel" id="user_name">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0.19999998807907104</property>
+                <property name="xalign">0.10000000149011612</property>
                 <property name="label" translatable="yes">User Name:</property>
               </object>
               <packing>
@@ -55,9 +55,14 @@
               </packing>
             </child>
             <child>
-              <object class="GtkTextView" id="textview1">
+              <object class="GtkEntry" id="entry1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+                <property name="primary_icon_activatable">False</property>
+                <property name="secondary_icon_activatable">False</property>
+                <property name="primary_icon_sensitive">True</property>
+                <property name="secondary_icon_sensitive">True</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -80,7 +85,7 @@
               <object class="GtkLabel" id="new_password1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0.20000000298023224</property>
+                <property name="xalign">0.10000000149011612</property>
                 <property name="label" translatable="yes">Password:</property>
               </object>
               <packing>
@@ -120,7 +125,7 @@
               <object class="GtkLabel" id="new_password2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0.20000000298023224</property>
+                <property name="xalign">0.10000000149011612</property>
                 <property name="label" translatable="yes">Confirm Password:</property>
               </object>
               <packing>
@@ -160,6 +165,7 @@
               <object class="GtkLabel" id="access_level">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0.30000001192092896</property>
                 <property name="label" translatable="yes">Access Level:</property>
               </object>
               <packing>
