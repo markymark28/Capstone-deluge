@@ -42,7 +42,6 @@ deluge.common.setup_translations(setup_gettext=False, setup_pygtk=True)
 
 class _GtkBuilderSignalsHolder(object):
     def connect_signals(self, mapping_or_class):
-
         if isinstance(mapping_or_class, dict):
             for name, handler in mapping_or_class.iteritems():
                 if hasattr(self, name):
@@ -50,6 +49,7 @@ class _GtkBuilderSignalsHolder(object):
                         "A handler for signal %r has already been registered: %s" %
                         (name, getattr(self, name))
                     )
+                print(name)
                 setattr(self, name, handler)
         else:
             for name in dir(mapping_or_class):
@@ -58,8 +58,9 @@ class _GtkBuilderSignalsHolder(object):
                 if hasattr(self, name):
                     raise RuntimeError("A handler for signal %r has already been registered: %s" %
                                        (name, getattr(self, name)))
+                                       
                 setattr(self, name, getattr(mapping_or_class, name))
-
+                
 
 class MainWindow(component.Component):
     def __init__(self):

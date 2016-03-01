@@ -129,6 +129,8 @@ class MenuBar(component.Component):
             "on_menuitem_createtorrent_activate": self.on_menuitem_createtorrent_activate,
             "on_menuitem_quitdaemon_activate": self.on_menuitem_quitdaemon_activate,
             "on_menuitem_quit_activate": self.on_menuitem_quit_activate,
+            ##############################
+            "on_menuitem_sendtorrent_activate": self.on_menuitem_sendtorrent_activate,
 
             # Edit Menu
             "on_menuitem_preferences_activate": self.on_menuitem_preferences_activate,
@@ -257,7 +259,14 @@ class MenuBar(component.Component):
         log.debug("on_menuitem_createtorrent_activate")
         from deluge.ui.gtkui.createtorrentdialog import CreateTorrentDialog
         CreateTorrentDialog().show()
-
+    def on_menuitem_sendtorrent_activate(self, data=None):
+    	from deluge.ui.gtkui.sendtorrentdialog.py import SendTorrentDialog
+        SendTorrentDialog().show()
+	#############################
+	def on_menuitem_sendtorrent_activate(self, data=None):
+		log.debug("on_menuitem_sendtorrent_activate")
+		component.get("SendTorrentDialog").show()
+		
     def on_menuitem_quitdaemon_activate(self, data=None):
         log.debug("on_menuitem_quitdaemon_activate")
         self.window.quit(shutdown=True)
