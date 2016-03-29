@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkDialog" id="add_account_dialog">
+  <object class="GtkDialog" id="edit_account_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="type_hint">dialog</property>
@@ -12,15 +12,10 @@
         <property name="can_focus">False</property>
         <property name="spacing">2</property>
         <child>
-          <object class="GtkLabel" id="AddUserLabel">
+          <object class="GtkLabel" id="EditUserLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xalign">2.2351741291171123e-010</property>
-            <property name="label" translatable="yes">Add User</property>
-            <attributes>
-              <attribute name="weight" value="bold"/>
-              <attribute name="size" value="10"/>
-            </attributes>
+            <property name="label" translatable="yes">Edit User</property>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -34,12 +29,11 @@
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="create_user">
-                <property name="label" translatable="yes">Add User</property>
+              <object class="GtkButton" id="edit_user">
+                <property name="label" translatable="yes">Edit User</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="on_create_user_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -63,9 +57,7 @@
               <object class="GtkLabel" id="UserFieldLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0.10000000149011612</property>
                 <property name="label" translatable="yes">Username:</property>
-                <property name="justify">right</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -105,7 +97,6 @@
               <object class="GtkLabel" id="PassFieldLabel1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0.10000000149011612</property>
                 <property name="label" translatable="yes">Password</property>
               </object>
               <packing>
@@ -147,7 +138,6 @@
               <object class="GtkLabel" id="PassFieldLabel2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0.10000000149011612</property>
                 <property name="label" translatable="yes">Confirm Password</property>
               </object>
               <packing>
@@ -228,7 +218,19 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkRadioButton" id="admin_button">
+                <property name="label" translatable="yes">Administrator</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
+                <property name="group">oper_button</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -240,7 +242,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">create_user</action-widget>
+      <action-widget response="0">edit_user</action-widget>
     </action-widgets>
   </object>
 </interface>

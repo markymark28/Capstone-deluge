@@ -28,8 +28,7 @@ from deluge.ui.gtkui.dialogs import AuthenticationDialog, ErrorDialog
 log = logging.getLogger(__name__)
 
 
-
-
+    
 class AddAccount(component.Component):
     def __init__(self):
         component.Component.__init__(self, "AddAccount")
@@ -47,20 +46,64 @@ class AddAccount(component.Component):
                 usrname = line.rstrip('\n')
         read.close
         filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
-        self.builder.add_from_file(filepath+"/add_account.ui")#deluge.common.resource_filename(
+        self.builder.add_from_file(filepath+"/add_account_dialog.ui")#deluge.common.resource_filename(
             #"deluge.ui.gtkui", os.path.join("glade", "add_torrent_dialog.ui")
         
 		######################################################################################
-        self.dialog = self.builder.get_object("window1")
+        #self.builder.connect_signals(Handler())
+        
+        self.dialog = self.builder.get_object("add_account_dialog")
     def show(self):
-        if component.get("MainWindow").is_on_active_workspace():
-            self.dialog.set_transient_for(component.get("MainWindow").window)
-        else:
-            self.dialog.set_transient_for(None)
+        #if component.get("AddAccount").is_on_active_workspace():
+        #self.dialog.set_transient_for(component.get("AddAccount").window)
+        #else:
+            #self.dialog.set_transient_for(None)
+            
+        self.builder.connect_signals({
+            # Torrent Menu                                                                                                                       
+            "on_create_user_clicked": self.on_create_user_clicked,
+            "on_button_close_clicked": self.on_button_close_clicked
+        })
+        
+        #window = builder.get_object("window1")
+        #window.show_all()
+
 
         self.dialog.present()
+        gtk.main()
 
         return None
 
-   
+    def on_create_user_clicked(self, widget):
+        
+        username = self.builder.get_object('account_name').get_text()
+        pass1 = self.builder.get_object('password_field1').get_text()
+        pass2 = self.builder.get_object('password_field2').get_text()
+
+        print "username: " + username
+        print "pass1: " + pass1
+        print "pass2: " + pass2
+
+        
+
+        hash_object = hashlib.md5(bytes(pass1))
+        hash_pass = hash_object.hexdigest()
+    
+        if pass1 == pass2:
+            fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'a')
+            fin.write(username +':' + hash_pass + ':' +  self.builder.get_object("combobox1").get_active_text().lower()  + '\n')
+            fin.close()
+        
+        #print "CREATED ACCOUNT LOLZ"
+        #print self.builder.get_object("combobox1").get_active_text()
+        
+
+        self.builder.get_object("add_account_dialog").response(gtk.RESPONSE_CLOSE)
+        
+
+        
+    def on_button_close_clicked(self, widget):
+        pass
+        
+
     

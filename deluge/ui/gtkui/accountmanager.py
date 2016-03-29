@@ -86,7 +86,57 @@ class AccountManager(component.Component):
 
         self.builder.get_object("image1").set_from_pixbuf(get_logo(32))
 
-     
+        #######################################3LISTVIEWSHIT#########################
+         #create liststore
+        self.liststore = self.builder.get_object("liststore1")
+        
+        #create treeview using liststore
+        #self.treeview  = gtk.TreeView(self.liststore)
+        self.treeview = self.builder.get_object("listview_accounts")
+        
+        #create the columns to display the data
+        render = gtk.CellRendererToggle()
+        #render.connect("toggled", self._on_file_toggled )
+        
+        self.col0 = gtk.TreeViewColumn('Name')
+        self.col1 = gtk.TreeViewColumn('Level')
+
+        #open file
+        fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'r')
+        for line in fin:
+            #print "FILE IO"
+            #print line
+            line = line.strip()
+            line = line.split(':')
+            print line[0]
+            print line[2]
+            self.liststore.append([line[0], line[2]])
+       
+                #add columns to treeview
+        self.treeview.append_column(self.col0)
+        self.treeview.append_column(self.col1)
+        
+        
+        #create cellrenderers to render the data
+        self.cell1 = gtk.CellRendererText()
+        self.cell2 = gtk.CellRendererText()
+        
+        #add the cells to the columns
+        self.col0.pack_start(self.cell1, True)
+        self.col1.pack_start(self.cell2, True)
+        
+        #set the cell attributes to the appropriate liststore column
+        self.col0.set_attributes(self.cell1, text=0)
+        self.col1.set_attributes(self.cell2, text=1)
+        
+        self.treeview.set_model(self.liststore)
+        
+        #allow sorting
+        self.col0.set_sort_column_id(0)
+        
+        #self.treeview.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
+        
+        #self.dialog.show()
 
       
 
@@ -96,7 +146,7 @@ class AccountManager(component.Component):
             "on_button_adduser_clicked": self.on_button_adduser_clicked,
             "on_button_removeuser_clicked": self.on_button_removeuser_clicked,
 	        "on_button_edituser_clicked": self.on_button_edituser_clicked,
-            "on_hostlist_row_activated": self.on_hostlist_row_activated,
+            #"on_hostlist_row_activated": self.on_hostlist_row_activated,
             "on_button_close_clicked": self.on_button_close_clicked
         })
         self.running = True
@@ -112,59 +162,69 @@ class AccountManager(component.Component):
         self.running = False
 
         # Save the toggle options
-        
+       
         self.account_manager.destroy()
         del self.builder
         del self.window
         del self.account_manager
+
+    def get_selected(self):
+        """Returns the selected tracker"""
+        return self.treeview.get_selection().get_selected()[1]
+
        
     def on_button_close_clicked(self, widget):
         self.account_manager.response(gtk.RESPONSE_CLOSE)
 
     def on_button_adduser_clicked(self, data):
-        print("hlll")
-        log.debug("on_button_addhost_clicked")
-        dialog = self.builder.get_object("addhost_dialog")
-        dialog.set_transient_for(self.connection_manager)
-        dialog.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-        hostname_entry = self.builder.get_object("entry_hostname")
-        port_spinbutton = self.builder.get_object("spinbutton_port")
-        username_entry = self.builder.get_object("entry_username")
-        password_entry = self.builder.get_object("entry_password")
-        button_addhost_save = self.builder.get_object("button_addhost_save")
-        button_addhost_save.hide()
-        button_addhost_add = self.builder.get_object("button_addhost_add")
-        button_addhost_add.show()
-        response = dialog.run()
-        if response == 1:
-            username = username_entry.get_text()
-            password = password_entry.get_text()
-            hostname = hostname_entry.get_text()
-
-            if (not password and not username or username == "localclient") and hostname in ["127.0.0.1", "localhost"]:
-                username, password = get_localhost_auth()
-
-            # We add the host
-            try:
-                self.add_host(hostname, port_spinbutton.get_value_as_int(),
-                              username, password)
-            except Exception as ex:
-                ErrorDialog(_("Error Adding Host"), ex).run()
-
-        username_entry.set_text("")
-        password_entry.set_text("")
-        hostname_entry.set_text("")
-        port_spinbutton.set_value(58846)
-        dialog.hide()
+        component.get("AddAccount").show()
         
     def on_button_edituser_clicked(self,widget):
-        pass
+
+        self.treeview = self.builder.get_object("listview_accounts")
+        model, pathlist = self.treeview.get_selection().get_selected_rows()
+        for path in pathlist:
+            tree_iter = model.get_iter(path)
+            value = model.get_value(tree_iter, 0)
+            print "Passing: " + value
+        fout = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/pass.txt", 'w')
+        fout.write(value)
+        fout.close()
+
         component.get("EditAccount").show()
-    def on_button_adduser_clicked(self,widget):
+    '''def on_button_adduser_clicked(self,widget):
         print("hhh")
         component.get("AddAccount").show()
-
+    '''
     def on_button_removeuser_clicked(self,widget):
-        pass
+        print "Remove User Clicked"
+        #model, row = self.listview_accounts.get_selection().get_selected()
+        self.treeview = self.builder.get_object("listview_accounts")
+        model, pathlist = self.treeview.get_selection().get_selected_rows()
+        for path in pathlist:
+            tree_iter = model.get_iter(path)
+            value = model.get_value(tree_iter, 0)
+            print value
+
+        fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'r')
+        lines = fin.read()
+        fin.close()
+       
+        fout = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'w')
+        lines = lines.split("\n")
+        for line in lines:
+            if len(line) is not 0:
+                print line
+                line = line.strip()
+                line = line.split(':')
+                if line[0] != value:
+                    fout.write(line[0] + ':' + line[1] + ':' + line[2] + "\n")
+        fout.close()
+        print "Exit Remove User"
+
+
     def on_hostlist_row_activated(self,widget):
 	pass
+    
+    def on_button_close_clicked(self, widget):
+        self.account_manager.response(gtk.RESPONSE_CLOSE)

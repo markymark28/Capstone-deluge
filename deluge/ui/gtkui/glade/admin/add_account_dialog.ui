@@ -15,7 +15,12 @@
           <object class="GtkLabel" id="AddUserLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="xalign">2.2351741291171123e-010</property>
             <property name="label" translatable="yes">Add User</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="size" value="10"/>
+            </attributes>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -34,6 +39,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <signal name="clicked" handler="on_create_user_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -57,7 +63,9 @@
               <object class="GtkLabel" id="UserFieldLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0.10000000149011612</property>
                 <property name="label" translatable="yes">Username:</property>
+                <property name="justify">right</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -97,6 +105,7 @@
               <object class="GtkLabel" id="PassFieldLabel1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0.10000000149011612</property>
                 <property name="label" translatable="yes">Password</property>
               </object>
               <packing>
@@ -138,6 +147,7 @@
               <object class="GtkLabel" id="PassFieldLabel2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0.10000000149011612</property>
                 <property name="label" translatable="yes">Confirm Password</property>
               </object>
               <packing>
@@ -172,14 +182,15 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHBox" id="hbox5">
+          <object class="GtkHBox" id="hbox4">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkLabel" id="access_level">
+              <object class="GtkLabel" id="access_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Access Level:</property>
+                <property name="xalign">0.05000000074505806</property>
+                <property name="label" translatable="yes">Access Level</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -188,48 +199,21 @@
               </packing>
             </child>
             <child>
-              <object class="GtkRadioButton" id="oper_button">
-                <property name="label" translatable="yes">Operator</property>
+              <object class="GtkComboBox" id="combobox1">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">False</property>
-                <property name="active">True</property>
-                <property name="draw_indicator">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">liststore1</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
               </object>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkRadioButton" id="maint_button">
-                <property name="label" translatable="yes">Maintainer</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">False</property>
-                <property name="draw_indicator">True</property>
-                <property name="group">oper_button</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkRadioButton" id="admin_button">
-                <property name="label" translatable="yes">Administrator</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">False</property>
-                <property name="draw_indicator">True</property>
-                <property name="group">oper_button</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
               </packing>
             </child>
           </object>
@@ -244,5 +228,19 @@
     <action-widgets>
       <action-widget response="0">create_user</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name access_level -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Maintenance</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Operator</col>
+      </row>
+    </data>
   </object>
 </interface>
