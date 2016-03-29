@@ -77,7 +77,7 @@ class CreateTorrentDialog:
             "on_button_remove_clicked": self._on_button_remove_clicked,
             "on_button_down_clicked": self._on_button_down_clicked
         })
-
+		
         # path, icon, size
         self.files_treestore = gtk.TreeStore(str, str, gobject.TYPE_UINT64)
 
