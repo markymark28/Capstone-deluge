@@ -89,7 +89,7 @@
                     <property name="hscrollbar_policy">automatic</property>
                     <property name="vscrollbar_policy">automatic</property>
                     <child>
-                      <object class="GtkTreeView" id="hostlist">
+                      <object class="GtkTreeView" id="listview_accounts">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <signal name="row-activated" handler="on_hostlist_row_activated" swapped="no"/>
@@ -212,5 +212,19 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name Name -->
+      <column type="gchararray"/>
+      <!-- column-name Level -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes"/>
+        <col id="1" translatable="yes"/>
+      </row>
+    </data>
   </object>
 </interface>

@@ -23,17 +23,17 @@ def lgin(usr,pwd):
 	
 	#create hashed username and password
 	enteredPassword = hashlib.md5(str.encode(pwd.get_text()))
-	enteredUsername = hashlib.md5(str.encode(usr.get_text()))
+	enteredUsername = usr.get_text()
 	
 	#open username and password file
 	loginFile = open("hashes.txt", 'r')
 	
 	#check for matching username and password
 	for line in loginFile:
-		up = line.split("\t")
+		up = line.split(":")
 		username = up[0]
 		password = up[1]
-		if (str(username)) == enteredUsername.hexdigest():
+		if (str(username)) == enteredUsername:
 			if (str(password)) == enteredPassword.hexdigest():
 				accesslevel = str(up[2])
 				loggedin = True
