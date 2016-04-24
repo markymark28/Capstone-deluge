@@ -15,7 +15,12 @@ class Handler:
 		usrname = builder.get_object('entry2')
 		psswrd = builder.get_object('entry1')
 		lgin(usrname,psswrd)
+	def onButtonEnter(self,button):
+		usrname = builder.get_object('entry2')
+		psswrd = builder.get_object('entry1')
+		lgin(usrname,psswrd)
 
+		
 def lgin(usr,pwd):
 	#make global variabls
 	global accesslevel

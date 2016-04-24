@@ -227,4 +227,5 @@ class AccountManager(component.Component):
 	pass
     
     def on_button_close_clicked(self, widget):
+    	
         self.account_manager.response(gtk.RESPONSE_CLOSE)

@@ -26,9 +26,10 @@ from deluge.ui.gtkui.path_chooser import PathChooser
 from deluge.ui.gtkui.torrentview_data_funcs import cell_data_size
 from deluge.ui.common import TorrentInfo
 import csv
+import time
+import threading
 
 log = logging.getLogger(__name__)
-
 
 class SendTorrentDialog:
 
@@ -292,11 +293,45 @@ class SendTorrentDialog:
     		else:
     			email_str = email_str + str(email_list[i])
     	email_str = email_str + "'"
-    	
+    		
     	cmd = "thunderbird -compose \"to=" + email_str + ",subject='deluge',body='New Torrents to Download',attachment='" + torrent_str + "\""
         print(cmd)
         self.hide()
-        os.system(cmd)
+        
+        #THREADS
+        
+        thread1 = myThread(1,"Thread-1", 1)
+        thread2 = myThread(2,"Thread-2", 2)
+        
+        thread1.start()
+        ##################################
+        enig_builder = gtk.Builder()
+    	read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
+        i = 0
+        for line in read:
+            i = i + 1
+            if i%2 == 0:
+                lvl = line.rstrip('\n')
+                accesslevel = lvl
+            else:
+                usrname = line.rstrip('\n')
+        read.close
+        filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
+        enig_builder.add_from_file(filepath+"/starting_enigmail.ui")#resource_filename(
+        #enig_window = enig_builder.get_object("window1")
+        self.dialog = enig_builder.get_object("dialog1")
+        self.dialog.set_transient_for(component.get("MainWindow").window)
+        self.dialog.present()
+        ##################################
+        thread2.start()
+        startEnig(cmd)
+        thread2.join()
+        thread1.join()
+    	print("Exiting main thread")
+        #enig_window.destroy()
+    
+
+ 
         
     def _on_torrent_changed(self, treeselection):
         (model, row) = treeselection.get_selected()
@@ -616,4 +651,21 @@ class SendTorrentDialog:
         self.download_location_hbox = self.builder.get_object("hbox_download_location_chooser")
         self.download_location_path_chooser = PathChooser("download_location_paths_list")
         self.download_location_hbox.add(self.download_location_path_chooser)
-        self.download_location_hbox.show_all()     	
+        self.download_location_hbox.show_all()
+def startEnig(cmd):
+	os.system(cmd)
+	
+	
+	
+class myThread (threading.Thread):
+    def __init__(self, threadID, name, counter):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.counter = counter
+    def run(self):
+        print "Starting " + self.name
+        # Get lock to synchronize threads
+
+
+	             	

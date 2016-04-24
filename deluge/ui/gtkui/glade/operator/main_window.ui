@@ -367,17 +367,6 @@
                   <object class="GtkMenu" id="menuitem2_menu1">
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImageMenuItem" id="menuitem_homepage">
-                        <property name="label" translatable="yes">_Homepage</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">False</property>
-                        <signal name="activate" handler="on_menuitem_homepage_activate" swapped="no"/>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkImageMenuItem" id="menuitem_faq">
                         <property name="label" translatable="yes">_FAQ</property>
                         <property name="visible">True</property>
@@ -388,17 +377,6 @@
                         <property name="use_stock">False</property>
                         <accelerator key="F1" signal="activate"/>
                         <signal name="activate" handler="on_menuitem_faq_activate" swapped="no"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="menuitem_community">
-                        <property name="label" translatable="yes">_Community</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">False</property>
-                        <signal name="activate" handler="on_menuitem_community_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
