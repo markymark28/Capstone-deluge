@@ -108,8 +108,6 @@ class AccountManager(component.Component):
             #print line
             line = line.strip()
             line = line.split(':')
-            print line[0]
-            print line[2]
             self.liststore.append([line[0], line[2]])
        
                 #add columns to treeview
@@ -186,7 +184,6 @@ class AccountManager(component.Component):
         for path in pathlist:
             tree_iter = model.get_iter(path)
             value = model.get_value(tree_iter, 0)
-            print "Passing: " + value
         fout = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/pass.txt", 'w')
         fout.write(value)
         fout.close()
@@ -204,7 +201,6 @@ class AccountManager(component.Component):
         for path in pathlist:
             tree_iter = model.get_iter(path)
             value = model.get_value(tree_iter, 0)
-            print value
 
         fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'r')
         lines = fin.read()
@@ -214,7 +210,6 @@ class AccountManager(component.Component):
         lines = lines.split("\n")
         for line in lines:
             if len(line) is not 0:
-                print line
                 line = line.strip()
                 line = line.split(':')
                 if line[0] != value:

@@ -99,8 +99,6 @@ class EditAccount(component.Component):
                     line = line.strip()
                     line = line.split(':')
                     if line[0] != accountname:
-                        print line[0]
-                        print line[1]
                         fout.write(line[0] + ':' + line[1] +  ":" + line[2] + "\n")
                     else:
                         hash_object = hashlib.md5(bytes(pass1))

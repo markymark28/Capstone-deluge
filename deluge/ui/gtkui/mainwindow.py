@@ -49,7 +49,6 @@ class _GtkBuilderSignalsHolder(object):
                         "A handler for signal %r has already been registered: %s" %
                         (name, getattr(self, name))
                     )
-                print(name)
                 setattr(self, name, handler)
         else:
             for name in dir(mapping_or_class):

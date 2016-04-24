@@ -25,7 +25,6 @@ def lgin(usr,pwd):
 	#make global variabls
 	global accesslevel
 	global loggedin
-	print(pwd.get_text())
 	#create hashed username and password
 	enteredPassword = hashlib.md5(str.encode(pwd.get_text()))
 	enteredUsername = usr.get_text()
@@ -38,10 +37,6 @@ def lgin(usr,pwd):
 		up = line.split(":")
 		username = up[0]
 		password = up[1]
-		#print(up[0])
-		#print(up[1])
-		#print(enteredPassword.hexdigest())
-		#print(enteredUsername)
 		if (str(username)) == enteredUsername:
 			if (str(password)) == enteredPassword.hexdigest():
 				accesslevel = str(up[2])
@@ -69,5 +64,4 @@ def login():
 
 if __name__ == "__main__":
 	login()
-	print("yo")
 	os.system("deluge")

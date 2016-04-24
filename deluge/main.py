@@ -52,7 +52,6 @@ def version_callback(option, opt_str, value, parser):
 def start_ui():
     
     print("main start_ui")
-    print(accesslevel)
 
     """Entry point for ui script"""
     # Setup the argument parser

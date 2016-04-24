@@ -143,7 +143,6 @@ class AddAccountDialog(component.Component):
             self._show()
 
     def _show(self):
-        print "Blarg Show"
         pass
 
         '''   def set_config(self, hide=False):
