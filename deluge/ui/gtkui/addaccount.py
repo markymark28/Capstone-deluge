@@ -75,32 +75,33 @@ class AddAccount(component.Component):
         return None
 
     def on_create_user_clicked(self, widget):
-        
-        username = self.builder.get_object('account_name').get_text()
-        pass1 = self.builder.get_object('password_field1').get_text()
-        pass2 = self.builder.get_object('password_field2').get_text()
-
-        print "username: " + username
-        print "pass1: " + pass1
-        print "pass2: " + pass2
-
-        
-
-        hash_object = hashlib.md5(bytes(pass1))
-        hash_pass = hash_object.hexdigest()
     
-        if pass1 == pass2:
-            fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'a')
-            fin.write(username +':' + hash_pass + ':' +  self.builder.get_object("combobox1").get_active_text().lower()  + '\n')
-            fin.close()
-        
-        #print "CREATED ACCOUNT LOLZ"
-        #print self.builder.get_object("combobox1").get_active_text()
-        
+		username = self.builder.get_object('account_name').get_text()
+		pass1 = self.builder.get_object('password_field1').get_text()
+		pass2 = self.builder.get_object('password_field2').get_text()
+		statusbar = self.builder.get_object('addUsersSatusbar')
+		
+		if len(pass1) > 8:
+		
+			print "username: " + username
+			print "pass1: " + pass1
+			print "pass2: " + pass2
 
-        self.builder.get_object("add_account_dialog").response(gtk.RESPONSE_CLOSE)
-        
+		    
 
+			hash_object = hashlib.md5(bytes(pass1))
+			hash_pass = hash_object.hexdigest()
+		
+			if pass1 == pass2:
+				fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'a')
+				fin.write(username +':' + hash_pass + ':' +  self.builder.get_object("combobox1").get_active_text().lower()  + '\n')
+				fin.close()
+				name = username + " has been created"
+				statusbar.push(0, name) 
+
+			self.builder.get_object("add_account_dialog").response(gtk.RESPONSE_CLOSE)
+		else:
+			statusbar.push(0, "password must be at leat 8 characters")
         
     def on_button_close_clicked(self, widget):
         pass

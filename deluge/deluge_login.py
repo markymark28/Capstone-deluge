@@ -7,6 +7,8 @@ builder = gtk.Builder()
 #loggedin
 loggedin = False
 accesslevel = ''
+message = "hello"
+attempts = 0
 
 class Handler:
 	def onDeleteWindow(self, *args):
@@ -14,45 +16,57 @@ class Handler:
 	def onButtonPressed(self,button):
 		usrname = builder.get_object('entry2')
 		psswrd = builder.get_object('entry1')
+		textBox = builder.get_object('statusbar1')
 		lgin(usrname,psswrd)
-	def onButtonEnter(self,button):
+		textBox.push(0,message)
+	def on_Enter(self,button):
 		usrname = builder.get_object('entry2')
 		psswrd = builder.get_object('entry1')
+		textBox = builder.get_object('statusbar1')
 		lgin(usrname,psswrd)
+		textBox.push(0,message)
 
-		
 def lgin(usr,pwd):
 	#make global variabls
 	global accesslevel
 	global loggedin
-	#create hashed username and password
-	enteredPassword = hashlib.md5(str.encode(pwd.get_text()))
-	enteredUsername = usr.get_text()
+	global message
+	global attempts
 	
-	#open username and password file
-	loginFile = open("hashes.txt", 'r')
+	if (attempts < 5):
+		#create hashed username and password
+		enteredPassword = hashlib.md5(str.encode(pwd.get_text()))
+		enteredUsername = usr.get_text()
 	
-	#check for matching username and password
-	for line in loginFile:
-		up = line.split(":")
-		username = up[0]
-		password = up[1]
-		if (str(username)) == enteredUsername:
-			if (str(password)) == enteredPassword.hexdigest():
-				accesslevel = str(up[2])
-				loggedin = True
-				break
-	#if matching username and password then open deluge
-	if loggedin:
-		print("Welcome " + usr.get_text())
-		t = open("loggedinusrs.txt", 'w')
-		t.write(usr.get_text())
-		t.write("\n")
-		t.write(accesslevel)
-		t.close
-		gtk.main_quit()
+		#open username and password file
+		loginFile = open("hashes.txt", 'r')
+	
+		#check for matching username and password
+		for line in loginFile:
+			up = line.split(":")
+			username = up[0]
+		
+			password = up[1]
+			if (str(username)) == enteredUsername:
+				if (str(password)) == enteredPassword.hexdigest():
+					accesslevel = str(up[2])
+					loggedin = True
+					break
+		#if matching username and password then open deluge
+		if loggedin:
+			message = "Welcome " + usr.get_text()
+			t = open("loggedinusrs.txt", 'w')
+			t.write(usr.get_text())
+			t.write("\n")
+			t.write(accesslevel)
+			t.close
+			gtk.main_quit()
+		else:
+			message = "Invalid username or password"
+			attempts = attempts + 1
+	
 	else:
-		print("Invalid username or password")
+		message = "out of attempts"
 	
 
 def login():
@@ -64,4 +78,5 @@ def login():
 
 if __name__ == "__main__":
 	login()
+	print("yo")
 	os.system("deluge")
