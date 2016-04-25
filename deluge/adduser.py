@@ -26,5 +26,13 @@ f.write("Mark:")
 hash_object = hashlib.md5(b'blarg')
 f.write("%s:" % hash_object.hexdigest())
 f.write("admin\n")
+
+#user 4
+f.write("John:")
+#hash_object = hashlib.md5(b'Mark')
+#f.write("%s:" % hash_object.hexdigest())
+hash_object = hashlib.md5(b'edward')
+f.write("%s:" % hash_object.hexdigest())
+f.write("sadmin\n")
 f.close()
 

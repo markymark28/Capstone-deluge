@@ -1,2 +1,2 @@
-Mark
-admin
+John
+sadmin

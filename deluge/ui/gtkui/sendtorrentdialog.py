@@ -28,7 +28,7 @@ from deluge.ui.common import TorrentInfo
 import csv
 import time
 import threading
-
+import subprocess
 log = logging.getLogger(__name__)
 
 class SendTorrentDialog:
@@ -300,10 +300,10 @@ class SendTorrentDialog:
         
         #THREADS
         
-        thread1 = myThread(1,"Thread-1", 1)
-        thread2 = myThread(2,"Thread-2", 2)
+        #thread1 = myThread(1,"Thread-1", 1)
+        #thread2 = myThread(2,"Thread-2", 2)
         
-        thread1.start()
+        #sthread1.start()
         ##################################
         enig_builder = gtk.Builder()
     	read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
@@ -323,11 +323,15 @@ class SendTorrentDialog:
         self.dialog.set_transient_for(component.get("MainWindow").window)
         self.dialog.present()
         ##################################
-        thread2.start()
-        startEnig(cmd)
-        thread2.join()
-        thread1.join()
+        #thread2.start()
+        #os.system(cmd)
+        subprocess.call(cmd, shell=True)
+        #os.subprocess
+
+        #thread2.join()
+        #thread1.join()
     	print("Exiting main thread")
+    	self.dialog.hide()
         #enig_window.destroy()
     
 
@@ -652,8 +656,7 @@ class SendTorrentDialog:
         self.download_location_path_chooser = PathChooser("download_location_paths_list")
         self.download_location_hbox.add(self.download_location_path_chooser)
         self.download_location_hbox.show_all()
-def startEnig(cmd):
-	os.system(cmd)
+	
 	
 	
 	

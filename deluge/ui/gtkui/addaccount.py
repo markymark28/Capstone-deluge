@@ -83,9 +83,9 @@ class AddAccount(component.Component):
 		
 		if len(pass1) > 8:
 		
-			print "username: " + username
-			print "pass1: " + pass1
-			print "pass2: " + pass2
+			#print "username: " + username
+			#print "pass1: " + pass1
+			#print "pass2: " + pass2
 
 		    
 
@@ -94,10 +94,15 @@ class AddAccount(component.Component):
 		
 			if pass1 == pass2:
 				fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'a')
-				fin.write(username +':' + hash_pass + ':' +  self.builder.get_object("combobox1").get_active_text().lower()  + '\n')
+				if self.builder.get_object("combobox1").get_active_text() == "Super Admin":
+					fin.write(username +':' + hash_pass + ':' +  "sadmin"  + '\n')
+				else:
+					fin.write(username +':' + hash_pass + ':' +  self.builder.get_object("combobox1").get_active_text().lower()  + '\n')
 				fin.close()
 				name = username + " has been created"
-				statusbar.push(0, name) 
+				statusbar.push(0, name)
+			else:
+				statusbar.push(0,"Passwords do not match") 
 
 			self.builder.get_object("add_account_dialog").response(gtk.RESPONSE_CLOSE)
 		else:
