@@ -105,6 +105,7 @@ class AddAccount(component.Component):
 				fin.close()
 				name = username + " has been created"
 				statusbar.push(0, name)
+				self.dialog.hide()
 			else:
 				statusbar.push(0,"Passwords do not match") 
 
@@ -112,7 +113,7 @@ class AddAccount(component.Component):
 		else:
 			statusbar.push(0, "password must be at leat 8 characters")
         
-        
+		
         
     def on_button_close_clicked(self, widget):
         self.dialog.hide()
