@@ -32,6 +32,16 @@ log = logging.getLogger(__name__)
 class AddAccount(component.Component):
     def __init__(self):
         component.Component.__init__(self, "AddAccount")
+        self.gtkui_config = ConfigManager("gtkui.conf")
+        self.running = False
+        
+        #component.Component.__init__(self, "AddAccount")
+        
+    def show(self):
+        #if component.get("AddAccount").is_on_active_workspace():
+        #self.dialog.set_transient_for(component.get("AddAccount").window)
+        #else:
+            #self.dialog.set_transient_for(None)
         self.builder = gtk.Builder()
         # The base dialog
         #######################################################################
@@ -53,11 +63,6 @@ class AddAccount(component.Component):
         #self.builder.connect_signals(Handler())
         
         self.dialog = self.builder.get_object("add_account_dialog")
-    def show(self):
-        #if component.get("AddAccount").is_on_active_workspace():
-        #self.dialog.set_transient_for(component.get("AddAccount").window)
-        #else:
-            #self.dialog.set_transient_for(None)
             
         self.builder.connect_signals({
             # Torrent Menu                                                                                                                       
@@ -70,7 +75,6 @@ class AddAccount(component.Component):
 
 
         self.dialog.present()
-        gtk.main()
 
         return None
 
@@ -108,8 +112,10 @@ class AddAccount(component.Component):
 		else:
 			statusbar.push(0, "password must be at leat 8 characters")
         
+        
+        
     def on_button_close_clicked(self, widget):
-        pass
+        self.dialog.hide()
         
 
     

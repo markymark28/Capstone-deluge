@@ -32,6 +32,15 @@ log = logging.getLogger(__name__)
 class EditAccount(component.Component):
     def __init__(self):
         component.Component.__init__(self, "EditAccount")
+        self.gtkui_config = ConfigManager("gtkui.conf")
+        self.running = False
+        
+        
+    def show(self):
+        #if component.get("AddAccount").is_on_active_workspace():
+        #self.dialog.set_transient_for(component.get("AddAccount").window)
+        #else:
+            #self.dialog.set_transient_for(None)
         self.builder = gtk.Builder()
         # The base dialog
         #######################################################################
@@ -49,15 +58,7 @@ class EditAccount(component.Component):
         self.builder.add_from_file(filepath+"/edit_account_dialog.ui")#deluge.common.resource_filename(
             #"deluge.ui.gtkui", os.path.join("glade", "add_torrent_dialog.ui")
         
-		######################################################################################
-        #self.builder.connect_signals(Handler())
-        
         self.dialog = self.builder.get_object("edit_account_dialog")
-    def show(self):
-        #if component.get("AddAccount").is_on_active_workspace():
-        #self.dialog.set_transient_for(component.get("AddAccount").window)
-        #else:
-            #self.dialog.set_transient_for(None)
             
         self.builder.connect_signals({
             # Torrent Menu                                                                                                                       
@@ -74,7 +75,6 @@ class EditAccount(component.Component):
 
 
         self.dialog.present()
-        gtk.main()
 
         return None
 

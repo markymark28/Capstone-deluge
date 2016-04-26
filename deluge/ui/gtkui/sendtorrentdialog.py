@@ -295,15 +295,8 @@ class SendTorrentDialog:
     	email_str = email_str + "'"
     		
     	cmd = "thunderbird -compose \"to=" + email_str + ",subject='deluge',body='New Torrents to Download',attachment='" + torrent_str + "\""
-        print(cmd)
         self.hide()
         
-        #THREADS
-        
-        #thread1 = myThread(1,"Thread-1", 1)
-        #thread2 = myThread(2,"Thread-2", 2)
-        
-        #sthread1.start()
         ##################################
         enig_builder = gtk.Builder()
     	read = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/loggedinusrs.txt", 'r')
@@ -318,21 +311,12 @@ class SendTorrentDialog:
         read.close
         filepath = "/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/ui/gtkui/glade/" + str(accesslevel)     
         enig_builder.add_from_file(filepath+"/starting_enigmail.ui")#resource_filename(
-        #enig_window = enig_builder.get_object("window1")
         self.dialog = enig_builder.get_object("dialog1")
         self.dialog.set_transient_for(component.get("MainWindow").window)
         self.dialog.present()
         ##################################
-        #thread2.start()
-        #os.system(cmd)
         subprocess.call(cmd, shell=True)
-        #os.subprocess
-
-        #thread2.join()
-        #thread1.join()
-    	print("Exiting main thread")
-    	self.dialog.hide()
-        #enig_window.destroy()
+    	#self.dialog.hide()
     
 
  

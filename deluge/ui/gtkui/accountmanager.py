@@ -170,15 +170,11 @@ class AccountManager(component.Component):
         """Returns the selected tracker"""
         return self.treeview.get_selection().get_selected()[1]
 
-       
-    def on_button_close_clicked(self, widget):
-        self.account_manager.response(gtk.RESPONSE_CLOSE)
-
     def on_button_adduser_clicked(self, data):
         component.get("AddAccount").show()
         
     def on_button_edituser_clicked(self,widget):
-
+        value = ''
         self.treeview = self.builder.get_object("listview_accounts")
         model, pathlist = self.treeview.get_selection().get_selected_rows()
         for path in pathlist:
@@ -219,8 +215,7 @@ class AccountManager(component.Component):
 
 
     def on_hostlist_row_activated(self,widget):
-	pass
+		pass
     
     def on_button_close_clicked(self, widget):
-    	
-        self.account_manager.response(gtk.RESPONSE_CLOSE)
+        self.account_manager.hide()
