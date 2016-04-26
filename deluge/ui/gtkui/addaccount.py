@@ -93,7 +93,7 @@ class AddAccount(component.Component):
 
 		    
 
-			hash_object = hashlib.md5(bytes(pass1))
+			hash_object = hashlib.sha1(bytes(pass1))
 			hash_pass = hash_object.hexdigest()
 		
 			if pass1 == pass2:

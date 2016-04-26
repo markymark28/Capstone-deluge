@@ -37,7 +37,7 @@ def lgin(usr,pwd):
 	
 	if (attempts < 5):
 		#create hashed username and password
-		enteredPassword = hashlib.md5(str.encode(pwd.get_text()))
+		enteredPassword = hashlib.sha1(str.encode(pwd.get_text()))
 		enteredUsername = usr.get_text()
 	
 		#open username and password file

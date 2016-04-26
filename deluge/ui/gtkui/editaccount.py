@@ -101,7 +101,7 @@ class EditAccount(component.Component):
                     if line[0] != accountname:
                         fout.write(line[0] + ':' + line[1] +  ":" + line[2] + "\n")
                     else:
-                        hash_object = hashlib.md5(bytes(pass1))
+                        hash_object = hashlib.sha1(bytes(pass1))
                         hash_pass = hash_object.hexdigest()
                         fout.write(accountname + ':' + hash_pass + ":" + self.builder.get_object("combobox1").get_active_text().lower() + '\n')
 
