@@ -85,7 +85,7 @@ class AddAccount(component.Component):
 		pass2 = self.builder.get_object('password_field2').get_text()
 		statusbar = self.builder.get_object('addUsersSatusbar')
 		
-		if len(pass1) > 8:
+		if len(pass1) >= 16:
 		
 			#print "username: " + username
 			#print "pass1: " + pass1
@@ -111,7 +111,7 @@ class AddAccount(component.Component):
 
 			self.builder.get_object("add_account_dialog").response(gtk.RESPONSE_CLOSE)
 		else:
-			statusbar.push(0, "password must be at leat 8 characters")
+			statusbar.push(0, "password must be at least 8 characters")
         
 		
         

@@ -72,7 +72,7 @@ def lgin(usr,pwd):
 	
 
 def login():
-    builder.add_from_file("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/login_menu.ui")
+    builder.add_from_file("./login_menu.ui")
     builder.connect_signals(Handler())
     window = builder.get_object("window1")
     window.show_all()    

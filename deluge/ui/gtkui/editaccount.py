@@ -89,9 +89,11 @@ class EditAccount(component.Component):
         fin.close()
 
         pass1 = self.builder.get_object('password_field1').get_text()                                                                                
-        pass2 = self.builder.get_object('password_field2').get_text()   
-
-        if pass1 == pass2:
+        pass2 = self.builder.get_object('password_field2').get_text() 
+        
+        statusbar = self.builder.get_object('editUserStatusbar')  
+        
+        if pass1 == pass2 and len(pass1) >= 16:
             fout = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'w')
             lines = lines.split("\n")
             for line in lines:
@@ -104,7 +106,13 @@ class EditAccount(component.Component):
                         hash_object = hashlib.sha1(bytes(pass1))
                         hash_pass = hash_object.hexdigest()
                         fout.write(accountname + ':' + hash_pass + ":" + self.builder.get_object("combobox1").get_active_text().lower() + '\n')
-
+        else:
+             if pass1 != pass2:
+                 #print
+                 statusbar.push(0,"Passwords do not match")
+             elif len(pass1) < 16 or len(pass2) < 16:
+                 #print
+                 statusbar.push(0,"Length must be at least 16 characters")
         fout.close()
         
 
@@ -124,7 +132,6 @@ class EditAccount(component.Component):
             fin.write(username +'\t' + "operator"  + '\n')
             fin.close()
         '''
-        print "CREATED ACCOUNT LOLZ"
         #print self.builder.get_object("combobox1").get_active_text()
         self.builder.get_object("edit_account_dialog").response(gtk.RESPONSE_CLOSE)
         self.builder.get_object("edit_account_dialog").destroy()
