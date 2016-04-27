@@ -115,7 +115,6 @@ class AddAccount(component.Component):
         
 		self.window = component.get("AccountManager")
 		self.window._updateFromAdd()
-		self.dialog.hide()
         
     def on_button_close_clicked(self, widget):
         self.dialog.hide()
