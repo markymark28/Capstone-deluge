@@ -111,9 +111,11 @@ class AddAccount(component.Component):
 
 			self.builder.get_object("add_account_dialog").response(gtk.RESPONSE_CLOSE)
 		else:
-			statusbar.push(0, "password must be at least 8 characters")
+			statusbar.push(0, "password must be at least 16 characters")
         
-		
+		self.window = component.get("AccountManager")
+		self.window._updateFromAdd()
+		self.dialog.hide()
         
     def on_button_close_clicked(self, widget):
         self.dialog.hide()

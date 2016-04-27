@@ -133,12 +133,14 @@ class EditAccount(component.Component):
             fin.close()
         '''
         #print self.builder.get_object("combobox1").get_active_text()
-        self.builder.get_object("edit_account_dialog").response(gtk.RESPONSE_CLOSE)
-        self.builder.get_object("edit_account_dialog").destroy()
+        self.window = component.get("AccountManager")
+        self.window._updateFromEdit()
+        self.builder.get_object("edit_account_dialog").hide()
 
         
     def on_button_close_clicked(self, widget):
         pass
         
-
+	def show_now(self,widget):
+		pass
     

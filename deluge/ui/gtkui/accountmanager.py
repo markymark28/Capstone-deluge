@@ -44,13 +44,45 @@ class AccountManager(component.Component):
         # Close this dialog when we are shutting down
         if self.running:
             self.account_manager.response(gtk.RESPONSE_CLOSE)
-
+    
     def shutdown(self):
         pass
 
     def __load_config(self):
         pass
     # Public methods
+    def _updateFromEdit(self):
+
+        # Setup the ConnectionManager dialog
+        self.liststore.clear()
+      
+        #open file
+        fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'r')
+        for line in fin:
+            #print "FILE IO"
+            #print line
+            line = line.strip()
+            line = line.split(':')
+            self.liststore.append([line[0], line[2]])
+       
+        self.treeview.set_model(self.liststore)
+    
+    def _updateFromAdd(self):
+
+        # Setup the ConnectionManager dialog
+        self.liststore.clear()
+      
+        #open file
+        fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'r')
+        for line in fin:
+            #print "FILE IO"
+            #print line
+            line = line.strip()
+            line = line.split(':')
+            self.liststore.append([line[0], line[2]])
+       
+        self.treeview.set_model(self.liststore)    
+    
     def show(self):
         """
         Show the ConnectionManager dialog.
@@ -144,7 +176,7 @@ class AccountManager(component.Component):
             "on_button_adduser_clicked": self.on_button_adduser_clicked,
             "on_button_removeuser_clicked": self.on_button_removeuser_clicked,
 	        "on_button_edituser_clicked": self.on_button_edituser_clicked,
-            #"on_hostlist_row_activated": self.on_hostlist_row_activated,
+            "on_hostlist_row_activated": self.on_hostlist_row_activated,
             "on_button_close_clicked": self.on_button_close_clicked
         })
         self.running = True
@@ -211,11 +243,66 @@ class AccountManager(component.Component):
                 if line[0] != value:
                     fout.write(line[0] + ':' + line[1] + ':' + line[2] + "\n")
         fout.close()
+
+        ###################
+        self.liststore = self.builder.get_object("liststore1")
+
+        #create treeview using liststore                                                                                                                                                                             
+        #self.treeview  = gtk.TreeView(self.liststore)                                                                                                                                                               
+        self.treeview = self.builder.get_object("listview_accounts")
+        self.liststore.clear()
+        #create the columns to display the data                                                                                                                                                                     
+        render = gtk.CellRendererToggle()
+       
+        fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'r')
+        for line in fin:
+            line = line.strip()
+            line = line.split(':')
+            self.liststore.append([line[0], line[2]])
+        #add columns to treeview                                                                                                                                                                             
+        #add the cells to the columns                                                                                                                                                                               
+        self.col0.pack_start(self.cell1, True)
+        self.col1.pack_start(self.cell2, True)
+        #set the cell attributes to the appropriate liststore column                                                                                                                                                
+        self.col0.set_attributes(self.cell1, text=0)
+        self.col1.set_attributes(self.cell2, text=1)
+        self.treeview.set_model(self.liststore)
+        #allow sorting                                                                                                                                                                                              
+        self.col0.set_sort_column_id(0)
+
+
         print "Exit Remove User"
 
 
+      
+
+
     def on_hostlist_row_activated(self,widget):
-		pass
+        self.liststore = self.builder.get_object("liststore1")
+
+        #create treeview using liststore                                                                                                                                                                             
+        #self.treeview  = gtk.TreeView(self.liststore)                                                                                                                                                               
+        self.treeview = self.builder.get_object("listview_accounts")
+        self.liststore.clear()
+        #create the columns to display the data                                                                                                                                                                     
+        render = gtk.CellRendererToggle()
+       
+        fin = open("/home/m160426/Desktop/Capstone/Capstone-deluge/deluge/hashes.txt", 'r')
+        for line in fin:
+            line = line.strip()
+            line = line.split(':')
+            self.liststore.append([line[0], line[2]])
+        #add columns to treeview                                                                                                                                                                             
+        #add the cells to the columns                                                                                                                                                                               
+        self.col0.pack_start(self.cell1, True)
+        self.col1.pack_start(self.cell2, True)
+        #set the cell attributes to the appropriate liststore column                                                                                                                                                
+        self.col0.set_attributes(self.cell1, text=0)
+        self.col1.set_attributes(self.cell2, text=1)
+        self.treeview.set_model(self.liststore)
+        #allow sorting                                                                                                                                                                                              
+        self.col0.set_sort_column_id(0)
+        pass
     
     def on_button_close_clicked(self, widget):
         self.account_manager.hide()
