@@ -121,7 +121,7 @@ class AccountManager(component.Component):
         #######################################3LISTVIEWSHIT#########################
          #create liststore
         self.liststore = self.builder.get_object("liststore1")
-        
+        self.liststore.clear()
         #create treeview using liststore
         #self.treeview  = gtk.TreeView(self.liststore)
         self.treeview = self.builder.get_object("listview_accounts")
